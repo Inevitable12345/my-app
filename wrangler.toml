@@ -1,9 +1,6 @@
 name = "my-app"
-type = "javascript"
-account_id = "b6fb36261ea521009bbb6ec13c1ee46f"
-workers_dev = true
+main = "src/index.ts"
+compatibility_date = "2026-06-24"
 
-[env.production]
-routes = [
-  { pattern = "sway.co.im/*", zone_name = "sway.co.im" }
-]
+[assets]
+directory = "./dist"
