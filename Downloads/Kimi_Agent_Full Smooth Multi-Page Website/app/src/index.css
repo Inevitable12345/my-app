@@ -1,0 +1,183 @@
+/* Font imports - must be first */
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 40 23% 94%;
+    --card: 0 0% 11%;
+    --card-foreground: 40 23% 94%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 40 23% 94%;
+    --primary: 152 100% 45%;
+    --primary-foreground: 0 0% 11%;
+    --secondary: 225 100% 56%;
+    --secondary-foreground: 40 23% 94%;
+    --muted: 0 0% 11%;
+    --muted-foreground: 0 0% 54%;
+    --accent: 152 100% 45%;
+    --accent-foreground: 0 0% 11%;
+    --destructive: 14 100% 50%;
+    --destructive-foreground: 40 23% 94%;
+    --border: 0 0% 100% / 0.12;
+    --input: 0 0% 100% / 0.12;
+    --ring: 152 100% 45%;
+    --radius: 0.625rem;
+
+    /* Custom Sway tokens */
+    --ease-primary: cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-dramatic: cubic-bezier(0.87, 0, 0.13, 1);
+    --duration-fast: 0.2s;
+    --duration-normal: 0.4s;
+    --duration-slow: 0.8s;
+    --duration-dramatic: 1.2s;
+    --stagger-base: 0.08s;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-black text-offwhite font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Hide default cursor on desktop */
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+
+  /* Text selection */
+  ::selection {
+    background-color: rgba(0, 230, 118, 0.3);
+    color: #1C1C1C;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1C1C1C;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00E676;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00c853;
+  }
+}
+
+@layer components {
+  /* Section label */
+  .section-label {
+    @apply font-mono text-[13px] uppercase tracking-[0.08em] text-green flex items-center gap-3;
+  }
+  .section-label::before {
+    content: '';
+    @apply w-6 h-0.5 bg-green inline-block;
+  }
+
+  /* Glass effect */
+  .glass {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  /* Magnetic button base */
+  .magnetic-btn {
+    @apply relative inline-flex items-center justify-center px-6 py-2.5 rounded-full font-body font-semibold text-[13px] uppercase tracking-wide transition-all duration-300;
+    transition-timing-function: var(--ease-primary);
+  }
+  .magnetic-btn-primary {
+    @apply bg-green text-charcoal;
+  }
+  .magnetic-btn-primary:hover {
+    @apply bg-red text-charcoal shadow-glow-green;
+    transform: translateY(-2px);
+  }
+  .magnetic-btn-secondary {
+    @apply bg-transparent border border-offwhite/80 text-offwhite;
+  }
+  .magnetic-btn-secondary:hover {
+    @apply border-green text-green;
+  }
+
+  /* Card styles */
+  .card-dark {
+    @apply bg-white/5 rounded-2xl p-8 border border-white/10 transition-all duration-300;
+  }
+  .card-dark:hover {
+    @apply border-green/30 shadow-glow-green;
+    transform: translateY(-4px);
+  }
+  .card-light {
+    @apply bg-cream rounded-2xl p-8 border border-charcoal/10 transition-all duration-300;
+  }
+  .card-light:hover {
+    @apply shadow-card-hover;
+    transform: translateY(-4px);
+  }
+
+  /* Nav link underline */
+  .nav-link {
+    @apply relative font-body font-medium text-sm uppercase tracking-[0.06em] text-offwhite/70 transition-colors duration-300;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-green scale-x-0 origin-left transition-transform duration-300;
+    transition-timing-function: var(--ease-primary);
+  }
+  .nav-link:hover {
+    @apply text-offwhite;
+  }
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+  .nav-link.active {
+    @apply text-green;
+  }
+  .nav-link.active::after {
+    @apply scale-x-100;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar utility */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
