@@ -1,0 +1,9 @@
+name = "my-app"
+type = "javascript"
+account_id = "b6fb36261ea521009bbb6ec13c1ee46f"
+workers_dev = true
+
+[env.production]
+routes = [
+  { pattern = "sway.co.im/*", zone_name = "sway.co.im" }
+]
